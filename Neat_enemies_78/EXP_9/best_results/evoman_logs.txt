@@ -1,0 +1,83 @@
+
+
+MESSAGE: Pygame initialized for simulation.
+
+RUN: run status: enemy: 1; fitness: 4.456705217729996; player life: 0; enemy life: 90.0; time: 94
+
+RUN: run status: enemy: 2; fitness: 67.01639337829167; player life: 0; enemy life: 20.0; time: 146
+
+RUN: run status: enemy: 3; fitness: 22.75150475795064; player life: 0; enemy life: 70.0; time: 70
+
+RUN: run status: enemy: 4; fitness: 3.8701012850769265; player life: 0; enemy life: 90.0; time: 169
+
+RUN: run status: enemy: 5; fitness: 47.259480640393775; player life: 0; enemy life: 40.0; time: 846
+
+RUN: run status: enemy: 6; fitness: 21.852505523186547; player life: 0; enemy life: 70.0; time: 172
+
+RUN: run status: enemy: 7; fitness: 30.638707834290575; player life: 0; enemy life: 60.0; time: 213
+
+RUN: run status: enemy: 8; fitness: 86.49720062487333; player life: 24.400000000000247; enemy life: 0; time: 381
+
+RUN: run status: enemy: 1; fitness: 4.456705217729996; player life: 0; enemy life: 90.0; time: 94
+
+RUN: run status: enemy: 2; fitness: 66.93109579777976; player life: 0; enemy life: 20.0; time: 159
+
+RUN: run status: enemy: 3; fitness: 22.75150475795064; player life: 0; enemy life: 70.0; time: 70
+
+RUN: run status: enemy: 4; fitness: 3.8760360205967412; player life: 0; enemy life: 90.0; time: 168
+
+RUN: run status: enemy: 5; fitness: 47.26184750540404; player life: 0; enemy life: 40.0; time: 844
+
+RUN: run status: enemy: 6; fitness: 39.38322890233343; player life: 0; enemy life: 50.0; time: 275
+
+RUN: run status: enemy: 7; fitness: 30.638707834290575; player life: 0; enemy life: 60.0; time: 213
+
+RUN: run status: enemy: 8; fitness: 89.5935612249423; player life: 54.40000000000032; enemy life: 0; time: 346
+
+RUN: run status: enemy: 1; fitness: 12.790513847158579; player life: 0; enemy life: 80.0; time: 183
+
+RUN: run status: enemy: 2; fitness: 67.01639337829167; player life: 0; enemy life: 20.0; time: 146
+
+RUN: run status: enemy: 3; fitness: 22.51136363026786; player life: 0; enemy life: 70.0; time: 89
+
+RUN: run status: enemy: 4; fitness: 21.943754194651692; player life: 0; enemy life: 70.0; time: 157
+
+RUN: run status: enemy: 5; fitness: 47.375934772200104; player life: 0; enemy life: 40.0; time: 753
+
+RUN: run status: enemy: 6; fitness: 30.747726571953372; player life: 0; enemy life: 60.0; time: 191
+
+RUN: run status: enemy: 7; fitness: 66.62472159231584; player life: 0; enemy life: 20.0; time: 216
+
+RUN: run status: enemy: 8; fitness: 89.5935612249423; player life: 54.40000000000032; enemy life: 0; time: 346
+
+RUN: run status: enemy: 1; fitness: 4.22087650688847; player life: 0; enemy life: 90.0; time: 119
+
+RUN: run status: enemy: 2; fitness: 66.93109579777976; player life: 0; enemy life: 20.0; time: 159
+
+RUN: run status: enemy: 3; fitness: 22.51136363026786; player life: 0; enemy life: 70.0; time: 89
+
+RUN: run status: enemy: 4; fitness: 3.8701012850769265; player life: 0; enemy life: 90.0; time: 169
+
+RUN: run status: enemy: 5; fitness: 11.463308402408696; player life: 0; enemy life: 80.0; time: 690
+
+RUN: run status: enemy: 6; fitness: 30.747726571953372; player life: 0; enemy life: 60.0; time: 191
+
+RUN: run status: enemy: 7; fitness: 57.216174817670264; player life: 0; enemy life: 30.0; time: 325
+
+RUN: run status: enemy: 8; fitness: 86.49720062487333; player life: 24.400000000000247; enemy life: 0; time: 381
+
+RUN: run status: enemy: 1; fitness: 4.456705217729996; player life: 0; enemy life: 90.0; time: 94
+
+RUN: run status: enemy: 2; fitness: 67.01639337829167; player life: 0; enemy life: 20.0; time: 146
+
+RUN: run status: enemy: 3; fitness: 13.140187595638327; player life: 0; enemy life: 80.0; time: 129
+
+RUN: run status: enemy: 4; fitness: 21.943754194651692; player life: 0; enemy life: 70.0; time: 157
+
+RUN: run status: enemy: 5; fitness: 90.09275134159978; player life: 56.800000000000324; enemy life: 0; time: 267
+
+RUN: run status: enemy: 6; fitness: 21.807043149109788; player life: 0; enemy life: 70.0; time: 180
+
+RUN: run status: enemy: 7; fitness: 66.16811752271649; player life: 0; enemy life: 20.0; time: 341
+
+RUN: run status: enemy: 8; fitness: 86.49720062487333; player life: 24.400000000000247; enemy life: 0; time: 381

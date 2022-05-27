@@ -1,6 +1,6 @@
 import sys, os
 
-sys.path.insert(0, 'evoman')
+sys.path.insert(0, "evoman")
 from environment import Environment
 from controller import Controller
 import numpy as np
@@ -9,7 +9,7 @@ import random
 import pickle
 
 # CONFIGURATION
-experiment_name = 'Neat_enemies_278/EXP_10/best_results'
+experiment_name = "Neat_enemies_278/EXP_10/best_results"
 
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
@@ -23,9 +23,13 @@ class player_controller(Controller):
 
     def control(self, inputs, controller):
         # Normalises the input using min-max scaling
-        inputs = (inputs - min(inputs)) / float((max(inputs) - min(inputs)))  # Array with 20 inputs between 0 and 1
+        inputs = (inputs - min(inputs)) / float(
+            (max(inputs) - min(inputs))
+        )  # Array with 20 inputs between 0 and 1
 
-        output = self.net.activate(inputs)  # Activate the FF NN with the normalized 20 sensory inputs
+        output = self.net.activate(
+            inputs
+        )  # Activate the FF NN with the normalized 20 sensory inputs
 
         # takes decisions about sprite actions
         if output[0] > 0.5:
@@ -60,8 +64,13 @@ def run_from_solution(config_path, genome_path):
     # Function for running the game in test mode (with a given solution)
 
     # Load requried NEAT config
-    config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction, neat.DefaultSpeciesSet,
-                                neat.DefaultStagnation, config_path)
+    config = neat.config.Config(
+        neat.DefaultGenome,
+        neat.DefaultReproduction,
+        neat.DefaultSpeciesSet,
+        neat.DefaultStagnation,
+        config_path,
+    )
 
     # Unpickle saved winner
     with open(genome_path, "rb") as f:
@@ -74,24 +83,26 @@ def run_from_solution(config_path, genome_path):
     net = neat.nn.FeedForwardNetwork.create(genomes[0][1], config)
 
     # Call game with only the loaded genome
-    env = Environment(experiment_name=experiment_name,
-                      playermode="ai",
-                      enemies=[1,2,3,4,5,6,7,8],
-                      speed="fastest",
-                      player_controller=player_controller(net),
-                      enemymode="static",
-                      level=2,
-                      randomini="yes",
-                      multiplemode="yes")
+    env = Environment(
+        experiment_name=experiment_name,
+        playermode="ai",
+        enemies=[1, 2, 3, 4, 5, 6, 7, 8],
+        speed="fastest",
+        player_controller=player_controller(net),
+        enemymode="static",
+        level=2,
+        randomini="yes",
+        multiplemode="yes",
+    )
 
     # create a file for the best results
-    file_results = open(experiment_name + '/best_test_results.txt', 'a')
-    file_results.write('f p e t')
+    file_results = open(experiment_name + "/best_test_results.txt", "a")
+    file_results.write("f p e t")
 
     # play games and write in
     for i in range(5):
         f, p, e, t = env.play()
-        file_results.write('\n' + str(f) + ' ' + str(p) + ' ' + str(e) + ' ' + str(t))
+        file_results.write("\n" + str(f) + " " + str(p) + " " + str(e) + " " + str(t))
 
     # close file
     file_results.flush()
@@ -101,8 +112,6 @@ def run_from_solution(config_path, genome_path):
 if __name__ == "__main__":
     local_dir = os.path.dirname(__file__)
     config_path = os.path.join(local_dir, "config-feedforward.txt")
-    path = 'Neat_enemies_278/EXP_10/winner.pkl'
+    path = "Neat_enemies_278/EXP_10/winner.pkl"
 
     run_from_solution(config_path, genome_path=path)
-
-

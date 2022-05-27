@@ -1,6 +1,7 @@
 import pygame
 from . import SpriteConstants
 
+
 class SpriteDefinition(object):
     """Contains the properties and methods to control a SpriteSheet structure"""
 
@@ -17,12 +18,9 @@ class SpriteDefinition(object):
 
         image = pygame.Surface([self.Width, self.Height]).convert()
 
-        image.blit(self.SpriteSheet,
-                   (0, 0),
-                   (marginX,
-                    marginY,
-                    self.Width,
-                    self.Height))
+        image.blit(
+            self.SpriteSheet, (0, 0), (marginX, marginY, self.Width, self.Height)
+        )
 
         image.set_colorkey(SpriteConstants.BLACK)
 

@@ -4,7 +4,7 @@
 import random
 import sys
 
-sys.path.insert(0, 'evoman')
+sys.path.insert(0, "evoman")
 
 from environment import Environment
 from demo_controller import player_controller
@@ -21,20 +21,22 @@ os.environ["SDL_VIDEODRIVER"] = "dummy"
 n_hidden_neurons = 10
 
 # set the experiment name and create a directory if needed
-experiment_name = 'ea1_deap_enemies278_new_run10'
+experiment_name = "ea1_deap_enemies278_new_run10"
 if not os.path.exists(experiment_name):
     os.makedirs(experiment_name)
 
 # initializes simulation in multi evolution mode, for multiple static enemies.
-env = Environment(experiment_name=experiment_name,
-                  enemies=[2, 7, 8],
-                  multiplemode="yes",
-                  playermode="ai",
-                  player_controller=player_controller(n_hidden_neurons),
-                  enemymode="static",
-                  level=2,
-                  speed="fastest",
-                  randomini="yes")
+env = Environment(
+    experiment_name=experiment_name,
+    enemies=[2, 7, 8],
+    multiplemode="yes",
+    playermode="ai",
+    player_controller=player_controller(n_hidden_neurons),
+    enemymode="static",
+    level=2,
+    speed="fastest",
+    randomini="yes",
+)
 
 # save the environment state in the directory
 env.state_to_log()
@@ -53,7 +55,9 @@ alpha = 0.5
 
 # concerning the neural network
 lower, upper = -1.0, 1.0  # bounds on weights
-n_vars = (env.get_num_sensors() + 1) * n_hidden_neurons + (n_hidden_neurons + 1) * 5  # the weights themselves
+n_vars = (env.get_num_sensors() + 1) * n_hidden_neurons + (
+    n_hidden_neurons + 1
+) * 5  # the weights themselves
 
 
 # ---- SCHEME ----
@@ -68,7 +72,7 @@ n_vars = (env.get_num_sensors() + 1) * n_hidden_neurons + (n_hidden_neurons + 1)
 # runs simulation and returns tuple(!) with only fitness
 def simulation(x, env):
     f, p, e, t = env.play(pcont=x)  # convert into a np array before evaluating
-    return f,
+    return (f,)
 
 
 # ------ DEAP -----
@@ -82,7 +86,13 @@ creator.create("Individual", np.ndarray, fitness=creator.FitnessMax)
 # create an individual
 toolbox = base.Toolbox()
 toolbox.register("create_gene", np.random.uniform, lower, upper)
-toolbox.register("create_individual", tools.initRepeat, creator.Individual, toolbox.create_gene, n=n_vars)
+toolbox.register(
+    "create_individual",
+    tools.initRepeat,
+    creator.Individual,
+    toolbox.create_gene,
+    n=n_vars,
+)
 
 # create the population and an evaluation method
 toolbox.register("pop", tools.initRepeat, list, toolbox.create_individual)
@@ -90,7 +100,13 @@ toolbox.register("evaluate", simulation, env=env)
 
 # after creating the population - initialize the functions for the type of evolution
 toolbox.register("mate", tools.cxBlend, alpha=alpha)
-toolbox.register("mutate", tools.mutUniformInt, low=lower, up=upper, indpb=individual_mutation_probability)
+toolbox.register(
+    "mutate",
+    tools.mutUniformInt,
+    low=lower,
+    up=upper,
+    indpb=individual_mutation_probability,
+)
 
 # selecting
 toolbox.register("select", tools.selRoulette)
@@ -104,6 +120,7 @@ stats.register("std", np.std)
 
 
 # ------ RUNNING THE EA --------
+
 
 def main():
     # create a population of a certain size
@@ -124,7 +141,13 @@ def main():
 
     # log the results
     recording = stats.compile(pop)
-    logbook.record(gen=0, evals=len(pop), mean=recording["mean"], max=recording["max"], std=recording["std"])
+    logbook.record(
+        gen=0,
+        evals=len(pop),
+        mean=recording["mean"],
+        max=recording["max"],
+        std=recording["std"],
+    )
 
     # print the results after a generation is done
     print("gen: 0, best: ", recording["max"], "evals:", len(pop))
@@ -134,7 +157,9 @@ def main():
     for generation in range(gens):
         # select number of offspring based on parents --> population size * 4
         next_gen = toolbox.select(pop, npop * 4)
-        next_gen = list(map(toolbox.clone, next_gen))  # note - we make this a list so we can iterate over this
+        next_gen = list(
+            map(toolbox.clone, next_gen)
+        )  # note - we make this a list so we can iterate over this
 
         # split the list in two (consecutive kids will be paired)
         first_children = next_gen[::2]
@@ -177,12 +202,30 @@ def main():
         hall_of_fame.update(next_gen_survivors)
 
         recording = stats.compile(next_gen_survivors)
-        logbook.record(gen=generation + 1, evals=len(next_gen_survivors), mean=recording["mean"], max=recording["max"],
-                       std=recording["std"])
+        logbook.record(
+            gen=generation + 1,
+            evals=len(next_gen_survivors),
+            mean=recording["mean"],
+            max=recording["max"],
+            std=recording["std"],
+        )
 
-        print("gen: ", generation + 1, ", best: ", recording["max"], ", total best: ",
-              hall_of_fame.items[0].fitness.values[0])
-        print("mean: ", recording["mean"], ", std: ", recording["std"], "nr evals: ", len(next_gen_survivors))
+        print(
+            "gen: ",
+            generation + 1,
+            ", best: ",
+            recording["max"],
+            ", total best: ",
+            hall_of_fame.items[0].fitness.values[0],
+        )
+        print(
+            "mean: ",
+            recording["mean"],
+            ", std: ",
+            recording["std"],
+            "nr evals: ",
+            len(next_gen_survivors),
+        )
 
         # the population is entirely replaced by the best offspring
         pop[:] = next_gen_survivors
@@ -194,20 +237,28 @@ def main():
     print("printing to file....")
 
     # basic structure of the result file
-    file_results = open(experiment_name + '/results.txt', 'a')
-    file_results.write('\n\ngen best mean std')
+    file_results = open(experiment_name + "/results.txt", "a")
+    file_results.write("\n\ngen best mean std")
 
     # write in the results
     for i in range(len(gen)):
-        file_results.write('\n' + str(gen[i]) + ' ' + str(round(max[i], 6)) + ' ' + str(round(mean[i], 6)) + ' ' + str(
-            round(std[i], 6)))
+        file_results.write(
+            "\n"
+            + str(gen[i])
+            + " "
+            + str(round(max[i], 6))
+            + " "
+            + str(round(mean[i], 6))
+            + " "
+            + str(round(std[i], 6))
+        )
 
     # close file writer
     file_results.flush()
     file_results.close()
 
     # saves best solution
-    np.savetxt(experiment_name + '/best.txt', hall_of_fame.items[0])
+    np.savetxt(experiment_name + "/best.txt", hall_of_fame.items[0])
 
     print("Finished experiment!")
 
